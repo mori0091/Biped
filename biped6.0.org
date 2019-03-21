@@ -1,0 +1,343 @@
+# -*- coding:utf-8-unix; -*-
+#+STARTUP: indent showall
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+#+HTML_HEAD: <style>pre.src{background:#343131;color:white;} </style>
+#+HTML_HEAD: <style>pre.src:before{background-color:black; border: 1px solid white;} </style>
+#+HTML_HEAD: <style>.org-svg {max-width:90%; width:auto; height:auto;} </style>
+
+#+TITLE: Biped ver.6.0
+#+SUBTITLE: A Quasi Passive Bipedal Walker
+#+AUTHOR: Daishi Mori (@mori0091)
+#+DATE: {{{modification-time(%F %R %Z,nil)}}}
+#+OPTIONS: num:0
+#+LANGUAGE: en
+#+KEYWORD: gait robot walker biomimetic
+
+#+begin_export html
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+end_export
+
+* Abstract
+
+We developed a simulation model of a quasi passive bipedal walker. Its very
+simple time-based locomotion CPG and the tensegrity body performs smooth and
+robust bipedal walking.
+
+Human and animals do not consider or compute the gait pattern, just learn the
+rhythm.
+
+* Past research
+
+We had developed a biped model "Biped ver.3" in the past. That had a tensegrity
+body actuated by artificial muscles. It had walked just by switching two set of
+springs' parameters periodically. No sensors, no ballancers and no controls had
+needed.
+
+Biped 3 :
+#+begin_export html
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xU7W76KDIvQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+#+end_export
+
+Artificial muscles had been simulated as a programmable spring/damper. Although
+no such actuators exists in fact...
+
+* New model
+
+So we developed new model "Biped ver.6" which has also a tensegrity body but
+actuated by servo-motors instead of artificial muscles. The new model's height,
+weight and mass distribution is designed as near as a human's body.
+
+Biped 6.0 \beta 7 :
+#+begin_export html
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tHUQk1Hwe6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+#+end_export
+\\
+
+Biped 6.0 \beta 9 :
+#+begin_export html
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/Algodoo?src=hash&amp;ref_src=twsrc%5Etfw">#Algodoo</a> <a href="https://twitter.com/hashtag/%E6%A9%9F%E6%A7%8B%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#機構学</a> <a href="https://twitter.com/hashtag/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88?src=hash&amp;ref_src=twsrc%5Etfw">#ロボット</a> <a href="https://twitter.com/hashtag/%E6%BA%96%E5%8F%97%E5%8B%95%E6%AD%A9%E8%A1%8C?src=hash&amp;ref_src=twsrc%5Etfw">#準受動歩行</a> <a href="https://twitter.com/hashtag/%E6%AD%A9%E8%A1%8C%E7%8F%BE%E8%B1%A1?src=hash&amp;ref_src=twsrc%5Etfw">#歩行現象</a><br>Biped ver6.0 β9<br>・成功率 93% (147/158)<br>・膝を伸ばすのを少し早く／速くした<br><br>もうこの辺でいいかな。<br>そろそろ歩行制御（歩容制御）の研究に移ろう <a href="https://t.co/SR27JaaCwu">pic.twitter.com/SR27JaaCwu</a></p>&mdash; 森 大志 (@mori0091) <a href="https://twitter.com/mori0091/status/1106874984524210176?ref_src=twsrc%5Etfw">2019年3月16日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+end_export
+\\
+
+Adding to that, it has the biomimetic knee joints.
+
+Biomimetic 1-DOF knee joint :
+#+begin_export html
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/Algodoo?src=hash&amp;ref_src=twsrc%5Etfw">#Algodoo</a> <a href="https://twitter.com/hashtag/%E6%A9%9F%E6%A7%8B%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#機構学</a> <a href="https://twitter.com/hashtag/%E8%86%9D%E9%96%A2%E7%AF%80?src=hash&amp;ref_src=twsrc%5Etfw">#膝関節</a><br>幾何学的にも機構学的にも美しい構造を見つけてしまった…。<br>円弧の半径を決めたらあとは全部芋づる式に配置が求まるやん…。ホントか？ <a href="https://t.co/72FyvPuVvN">pic.twitter.com/72FyvPuVvN</a></p>&mdash; 森 大志 (@mori0091) <a href="https://twitter.com/mori0091/status/1083049349926408192?ref_src=twsrc%5Etfw">2019年1月9日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+end_export
+\\
+
+* About Algodoo
+
+The [[http://www.algodoo.com][Algodoo]] is a 2D physics simulator we used.
+- Algodoo was developed for childrens' science education.
+- Algodoo is available as *free* download [[http://www.algodoo.com/]]
+- Algodoo has the scene sharing site *Algobox* [[http://www.algodoo.com/algobox/]]
+- Algodoo has an enbedded *Thyme* scripting language for advanced users.
+
+#+begin_export html
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xvAVQ6GEv-E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+#+end_export
+
+\\
+
+* Servo-motors in Algodoo
+
+A *servo-motor* in Algodoo is a hinge (rotational joint) whose =bend= property
+is set to =true=.
+
+Its $torque$ is calculated according to the following equation.
+
+\begin{eqnarray*}
+torque &=& min(f,C)\\
+     f &=& \begin{cases}
+           K_p (\phi_{target} - \phi_{current}) & (K_p \neq 0) \\
+           C                                    & (K_p = 0)
+           \end{cases}
+\end{eqnarray*}
+
+where
+- $K_p$            :: 
+     The propotional gain\\
+     (=bendConstant= in Algodoo)
+- $\phi_{target}$  :: 
+     The target angle of the *rotor* relative to the *base* of joint\\
+     (=bendTarget= in Algodoo)
+- $\phi_{current}$ :: 
+     The current angle of the *rotor* relative to the *base* of joint\\
+     (difference of =angle= between the rotor and the base, in Algodoo)
+- $C$              :: 
+     The maximum torque\\
+     (=motorTorque= in Algodoo)
+
+A hinge connects one object to the other. Here we call them the *rotor* and the
+*base*.\\
+Typically, the *rotor* is stacked on top of the *base* and the hinge is
+connecting them.
+
+#+CAPTION: Property setting for hinge as servo-motor
+#+NAME: tbl:property-setting_for_servo-motor
+|                 | property       | value                 | unit    |
+|-----------------+----------------+-----------------------+---------|
+|                 | =motor=        | =false=               |         |
+| $C$             | =motorTorque=  | ex. =100.0=           | [Nm]    |
+|                 | =motorSpeed=   | (unused)              | [rad/s] |
+|                 | =bend=         | =true=                |         |
+| $K_p$           | =bendConstant= | ex. =200.0= $(\ge 0)$ |         |
+| $\phi_{target}$ | =bendTarget=   | ex. =0.5 * math.pi=   | [rad]   |
+
+So the programming of servo-motors in Algodoo is mainly to control
+=bendConstant= and =bendTarget=.
+
+#+begin_note
+*[FYI] for Thyme script programmer:*
+- The =geom0= property of the hinge is the *rotor* object's =geomID=.
+- The =geom1= property of the hinge is the *base* object's =geomID=.
+#+end_note
+
+
+* Anatomy of our biped model
+
+- Control methods :: 
+  - State machines (STM) for each joints
+  - Time-based scheduling of STM (Periodic pendulam of motorized limbs)
+  - Weak auto-ballance (Adaptive control for servo-motors)
+- Actuators ::
+  - Servo-motors (shoulder, hip, knee, and ankle joints)
+- Sensors :: 
+  - Tilt sensor (=angle= of upper body)
+  - Rotary encoder (=angle= of thigh, shin/calf, and foot)
+- Unused sensors :: 
+  - Ground Reaction Force (GRF) sensor (heel and ball of the foot)
+
+#+begin_note
+- The GRF sensor is equipped on the sole of the foot, but *unused* yet.
+- Red, green and blue laser rays show the angle of thigh and upper body.
+#+end_note
+
+* The Control Methods of our biped model
+
+Our biped model has no brain but simple *Central Pattern Generator (CPG)*, and
+has a *tensegrity body structure* consists of the rigid objects and the
+servo-motors.
+
+The CPG manages/schedules the state machines (STMs) for each joints, and the
+servo-motors drives joints.
+
+- State machines (STMs) for each joints
+- Time-based scheduling of STM (Periodic pendulam of motorized limbs)
+- Weak auto-ballance (Adaptive control for servo-motors)
+
+Note that there is no complex computation such as Inverse Kinematics (IK),
+Zero Moment Point (ZMP), or else.
+
+** State machines (STM) for each joints
+
+The CPG manages/schedules the state machines (STMs) for each joints.
+
+- STM for the Shoulder joint (Left)
+- STM for the Shoulder joint (Right)
+- STM for the Hip joint (Left)
+- STM for the Hip joint (Right)
+- STM for the Knee joint (Left)
+- STM for the Knee joint (Right)
+- STM for the Ankle joint (Left)
+- STM for the Ankle joint (Right)
+
+All STMs have two states; *swing* and *stance*. (Figure [[fig:state-machines]])
+
+- swing state  :: The state performing a motion /assuming that the leg is in
+                  swing phase./
+- stance state :: The state performing a motion /assuming that the leg is in
+                  stance phase./
+
+Note that a STM state is not necessarily match to legs' swing/stance phase.
+
+#+begin_src plantuml :file fig/STM.svg :exports none
+state swing
+swing  : do swing phase motion
+swing  : while (0 <= phase < (1-duty))
+
+state stance
+stance : do stance phase motion
+stance : while ((1-duty) <= phase < 1)
+
+swing --> stance : timeout
+stance --> swing : timeout
+#+end_src
+
+#+CAPTION: State machines (STM) for each joints
+#+NAME: fig:state-machines
+[[file:fig/STM.svg]]
+
+The CPG controls the state transition of these STMs. (See the next section)
+
+** Time-based scheduling - Periodic pendulam of motorized limbs
+
+A STM has three timing parameter constants:
+- $cycle$    :: Duration of one cycle in seconds.
+- $duty$     :: The ratio of stance state to one cycle.
+- $delay$    :: Delay to reference time as a ratio to cycle.
+
+#+begin_src plantuml :file fig/STM-timing-chart.svg :exports none
+robust "A state machine (STM)" as STM
+scale 1 as 120 pixels
+
+STM is stance
+
+@STM
+0.2 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
+STM@1.2 <-> @2.2 : {T}
+STM@1.64 <-> @2.2 : {t1}
+STM@1.0 <-> @1.2 : {t2}
+legend
+ * cycle = T sec
+ * duty  = t1/T
+ * delay = t2/T
+end legend
+#+end_src
+
+#+CAPTION: Example timing-chart of a STM
+#+NAME: fig:example_timing-chart
+[[file:fig/STM-timing-chart.svg]]
+
+The CPG decides the STMs' current *state* according to the following equation:
+
+\begin{eqnarray*}
+phase &=& \left( \frac{time}{cycle} - delay + 1 \right) \pmod {1.0} \\
+state &=& \begin{cases}
+          stance & ( (1-duty) \le phase )\\
+          swing  & ( otherwise )
+          \end{cases} \\
+\end{eqnarray*}
+
+where
+- $time$  :: Reference time in seconds\\
+             (=Sim.time= in Algodoo)
+- $phase$ :: Normalized current time ($0 \le phase \lt 1$)
+- $state$ :: State of the STM ($stance$ or $swing$)
+
+
+#+CAPTION: Timing parameters of STM for each joints
+#+NAME: tbl:timing-parameters
+| Joint    | cycle   | duty | delay_{Left} | delay_{Right} |
+|----------+---------+------+--------------+---------------|
+| Shoulder | 1.2 sec | 0.60 |         0.00 |          0.50 |
+| Hip      | 1.2 sec | 0.56 |         0.50 |          0.00 |
+| Knee     | 1.2 sec | 0.66 |         0.50 |          0.00 |
+| Ankle    | 1.2 sec | 0.15 |         0.55 |          0.05 |
+
+
+** Weak auto-ballance - Adaptive control for servo-motors
+
+For each joints (servo-motors), its propotional gain $K_p$ (i.e. =bendConstant=)
+and target angle $\phi_{target}$ (i.e. =bendTarget=) are controlled according to
+the following equations.
+
+\begin{eqnarray*}
+K_p &=& P_{gain} \\
+\phi_{target} &=& \alpha_{c} + \alpha_{rotor}\,\theta_{rotor} + \alpha_{base}\,\theta_{base}\\
+\end{eqnarray*}
+
+where
+
+- $\theta_{rotor}$ :: 
+     The angle of the /rotor/ object relative to the *world*.\\
+     (=angle= of the /rotor/ in Algodoo)
+- $\theta_{base}$ :: 
+     The angle of the /base/ object relative to the *world*.\\
+     (=angle= of the /base/ in Algodoo)
+
+These two variables are sensor data.\\
+Any other variables are constants.
+
+The constants and sensors' value to be used in the above equations, are decided
+according to the state of each joints' state machine (STM). (Table.
+[[tbl:servo-parameters]])
+
+#+CAPTION: Servo-motor parameters for each joints/states
+#+NAME: tbl:servo-parameters
+| Joint    | State  | $P_{gain}$ | $\alpha_{c}$ | $\alpha_{rotor}$ | $\alpha_{base}$ | $\theta_{rotor}$ | $\theta_{base}$  |
+|----------+--------+------------+--------------+------------------+-----------------+------------------+------------------|
+| Shoulder | stance |          6 |         -0.2 |              0.0 |             0.0 | $\theta_{arm}$   | $\theta_{body}$  |
+| Shoulder | swing  |          6 |          0.1 |              0.0 |             0.0 | $\theta_{arm}$   | $\theta_{body}$  |
+|----------+--------+------------+--------------+------------------+-----------------+------------------+------------------|
+| Hip      | stance |        150 |       -0.075 |              0.5 |             0.5 | $\theta_{thigh}$ | $\theta_{body}$  |
+| Hip      | swing  |        200 |          0.8 |             -0.1 |             0.5 | $\theta_{thigh}$ | $\theta_{body}$  |
+|----------+--------+------------+--------------+------------------+-----------------+------------------+------------------|
+| Knee     | stance |        250 |        0.075 |              0.0 |             0.0 | $\theta_{shin}$  | $\theta_{thigh}$ |
+| Knee     | swing  |         10 |         -1.0 |              0.0 |             0.0 | $\theta_{shin}$  | $\theta_{thigh}$ |
+|----------+--------+------------+--------------+------------------+-----------------+------------------+------------------|
+| Ankle    | stance |         90 |         -1.0 |              0.0 |            0.35 | $\theta_{foot}$  | $\theta_{shin}$  |
+| Ankle    | swing  |          0 |          0.0 |              0.0 |             0.0 | $\theta_{foot}$  | $\theta_{shin}$  |
+
+#+begin_warning
+In case of the real robot, $\theta_{xyz}$ will be sensed by a tilt-sensor and/or
+a rotary encoder equipped on the object /xyz/. In general, sensors may not be so
+accurate or has some latency.
+
+In Algodoo, fortunately, any object (geometry) has =angle= property that is
+available to use as a very accurate tilt sensor. So we are not considering about
+sensor's error or latency.
+#+end_warning
+
+* Further work
+
+- Event/Time driven schedule of STMs
+- Gait pattern control
+- Seamless gait transition of quadruped
+- etc.
+
+
+* Conclusion
+
+Swing your legs rhythmically and you can walk.
+
+Animals do not consider or compute the gait pattern, just learn the rhythm.

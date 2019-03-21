@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-03-21 木 22:07 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Biped ver.6.0</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Daishi Mori (@mori0091)" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<style>pre.src{background:#343131;color:white;} </style>
+<style>pre.src:before{background-color:black; border: 1px solid white;} </style>
+<style>.org-svg {max-width:90%; width:auto; height:auto;} </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Biped ver.6.0
+<br />
+<span class="subtitle">A Quasi Passive Bipedal Walker</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd7b68eb">Abstract</a></li>
+<li><a href="#orgef04ad0">Past research</a></li>
+<li><a href="#org73f4c9d">New model</a></li>
+<li><a href="#orgbfd07ec">About Algodoo</a></li>
+<li><a href="#org6043a92">Servo-motors in Algodoo</a></li>
+<li><a href="#org4087b6e">Anatomy of our biped model</a></li>
+<li><a href="#org50fc3fa">The Control Methods of our biped model</a>
+<ul>
+<li><a href="#org3814c77">State machines (STM) for each joints</a></li>
+<li><a href="#org6e9d64a">Time-based scheduling - Periodic pendulam of motorized limbs</a></li>
+<li><a href="#orgfe8257a">Weak auto-ballance - Adaptive control for servo-motors</a></li>
+</ul>
+</li>
+<li><a href="#org338ff12">Further work</a></li>
+<li><a href="#org322d74f">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div id="outline-container-orgd7b68eb" class="outline-2">
+<h2 id="orgd7b68eb">Abstract</h2>
+<div class="outline-text-2" id="text-orgd7b68eb">
+<p>
+We developed a simulation model of a quasi passive bipedal walker. Its very
+simple time-based locomotion CPG and the tensegrity body performs smooth and
+robust bipedal walking.
+</p>
+
+<p>
+Human and animals do not consider or compute the gait pattern, just learn the
+rhythm.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgef04ad0" class="outline-2">
+<h2 id="orgef04ad0">Past research</h2>
+<div class="outline-text-2" id="text-orgef04ad0">
+<p>
+We had developed a biped model "Biped ver.3" in the past. That had a tensegrity
+body actuated by artificial muscles. It had walked just by switching two set of
+springs' parameters periodically. No sensors, no ballancers and no controls had
+needed.
+</p>
+
+<p>
+Biped 3 :
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xU7W76KDIvQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>
+Artificial muscles had been simulated as a programmable spring/damper. Although
+no such actuators exists in fact&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org73f4c9d" class="outline-2">
+<h2 id="org73f4c9d">New model</h2>
+<div class="outline-text-2" id="text-org73f4c9d">
+<p>
+So we developed new model "Biped ver.6" which has also a tensegrity body but
+actuated by servo-motors instead of artificial muscles. The new model's height,
+weight and mass distribution is designed as near as a human's body.
+</p>
+
+<p>
+Biped 6.0 &beta; 7 :
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tHUQk1Hwe6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>
+<br />
+</p>
+
+<p>
+Biped 6.0 &beta; 9 :
+</p>
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/Algodoo?src=hash&amp;ref_src=twsrc%5Etfw">#Algodoo</a> <a href="https://twitter.com/hashtag/%E6%A9%9F%E6%A7%8B%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#機構学</a> <a href="https://twitter.com/hashtag/%E3%83%AD%E3%83%9C%E3%83%83%E3%83%88?src=hash&amp;ref_src=twsrc%5Etfw">#ロボット</a> <a href="https://twitter.com/hashtag/%E6%BA%96%E5%8F%97%E5%8B%95%E6%AD%A9%E8%A1%8C?src=hash&amp;ref_src=twsrc%5Etfw">#準受動歩行</a> <a href="https://twitter.com/hashtag/%E6%AD%A9%E8%A1%8C%E7%8F%BE%E8%B1%A1?src=hash&amp;ref_src=twsrc%5Etfw">#歩行現象</a><br>Biped ver6.0 β9<br>・成功率 93% (147/158)<br>・膝を伸ばすのを少し早く／速くした<br><br>もうこの辺でいいかな。<br>そろそろ歩行制御（歩容制御）の研究に移ろう <a href="https://t.co/SR27JaaCwu">pic.twitter.com/SR27JaaCwu</a></p>&mdash; 森 大志 (@mori0091) <a href="https://twitter.com/mori0091/status/1106874984524210176?ref_src=twsrc%5Etfw">2019年3月16日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>
+<br />
+</p>
+
+<p>
+Adding to that, it has the biomimetic knee joints.
+</p>
+
+<p>
+Biomimetic 1-DOF knee joint :
+</p>
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/Algodoo?src=hash&amp;ref_src=twsrc%5Etfw">#Algodoo</a> <a href="https://twitter.com/hashtag/%E6%A9%9F%E6%A7%8B%E5%AD%A6?src=hash&amp;ref_src=twsrc%5Etfw">#機構学</a> <a href="https://twitter.com/hashtag/%E8%86%9D%E9%96%A2%E7%AF%80?src=hash&amp;ref_src=twsrc%5Etfw">#膝関節</a><br>幾何学的にも機構学的にも美しい構造を見つけてしまった…。<br>円弧の半径を決めたらあとは全部芋づる式に配置が求まるやん…。ホントか？ <a href="https://t.co/72FyvPuVvN">pic.twitter.com/72FyvPuVvN</a></p>&mdash; 森 大志 (@mori0091) <a href="https://twitter.com/mori0091/status/1083049349926408192?ref_src=twsrc%5Etfw">2019年1月9日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>
+<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbfd07ec" class="outline-2">
+<h2 id="orgbfd07ec">About Algodoo</h2>
+<div class="outline-text-2" id="text-orgbfd07ec">
+<p>
+The <a href="http://www.algodoo.com">Algodoo</a> is a 2D physics simulator we used.
+</p>
+<ul class="org-ul">
+<li>Algodoo was developed for childrens' science education.</li>
+<li>Algodoo is available as <b>free</b> download <a href="http://www.algodoo.com/">http://www.algodoo.com/</a></li>
+<li>Algodoo has the scene sharing site <b>Algobox</b> <a href="http://www.algodoo.com/algobox/">http://www.algodoo.com/algobox/</a></li>
+<li>Algodoo has an enbedded <b>Thyme</b> scripting language for advanced users.</li>
+</ul>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xvAVQ6GEv-E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>
+<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6043a92" class="outline-2">
+<h2 id="org6043a92">Servo-motors in Algodoo</h2>
+<div class="outline-text-2" id="text-org6043a92">
+<p>
+A <b>servo-motor</b> in Algodoo is a hinge (rotational joint) whose <code>bend</code> property
+is set to <code>true</code>.
+</p>
+
+<p>
+Its \(torque\) is calculated according to the following equation.
+</p>
+
+\begin{eqnarray*}
+torque &=& min(f,C)\\
+     f &=& \begin{cases}
+           K_p (\phi_{target} - \phi_{current}) & (K_p \neq 0) \\
+           C                                    & (K_p = 0)
+           \end{cases}
+\end{eqnarray*}
+
+<p>
+where
+</p>
+<dl class="org-dl">
+<dt>\(K_p\)           </dt><dd>The propotional gain<br />
+(<code>bendConstant</code> in Algodoo)</dd>
+<dt>\(\phi_{target}\) </dt><dd>The target angle of the <b>rotor</b> relative to the <b>base</b> of joint<br />
+(<code>bendTarget</code> in Algodoo)</dd>
+<dt>\(\phi_{current}\)</dt><dd>The current angle of the <b>rotor</b> relative to the <b>base</b> of joint<br />
+(difference of <code>angle</code> between the rotor and the base, in Algodoo)</dd>
+<dt>\(C\)             </dt><dd>The maximum torque<br />
+(<code>motorTorque</code> in Algodoo)</dd>
+</dl>
+
+<p>
+A hinge connects one object to the other. Here we call them the <b>rotor</b> and the
+<b>base</b>.<br />
+Typically, the <b>rotor</b> is stacked on top of the <b>base</b> and the hinge is
+connecting them.
+</p>
+
+<table id="org33b0244" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Property setting for hinge as servo-motor</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">property</th>
+<th scope="col" class="org-left">value</th>
+<th scope="col" class="org-left">unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>motor</code></td>
+<td class="org-left"><code>false</code></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">\(C\)</td>
+<td class="org-left"><code>motorTorque</code></td>
+<td class="org-left">ex. <code>100.0</code></td>
+<td class="org-left">[Nm]</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>motorSpeed</code></td>
+<td class="org-left">(unused)</td>
+<td class="org-left">[rad/s]</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>bend</code></td>
+<td class="org-left"><code>true</code></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">\(K_p\)</td>
+<td class="org-left"><code>bendConstant</code></td>
+<td class="org-left">ex. <code>200.0</code> \((\ge 0)\)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">\(\phi_{target}\)</td>
+<td class="org-left"><code>bendTarget</code></td>
+<td class="org-left">ex. <code>0.5 * math.pi</code></td>
+<td class="org-left">[rad]</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+So the programming of servo-motors in Algodoo is mainly to control
+<code>bendConstant</code> and <code>bendTarget</code>.
+</p>
+
+<div class="note">
+<p>
+<b>[FYI] for Thyme script programmer:</b>
+</p>
+<ul class="org-ul">
+<li>The <code>geom0</code> property of the hinge is the <b>rotor</b> object's <code>geomID</code>.</li>
+<li>The <code>geom1</code> property of the hinge is the <b>base</b> object's <code>geomID</code>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4087b6e" class="outline-2">
+<h2 id="org4087b6e">Anatomy of our biped model</h2>
+<div class="outline-text-2" id="text-org4087b6e">
+<dl class="org-dl">
+<dt>Control methods</dt><dd><ul class="org-ul">
+<li>State machines (STM) for each joints</li>
+<li>Time-based scheduling of STM (Periodic pendulam of motorized limbs)</li>
+<li>Weak auto-ballance (Adaptive control for servo-motors)</li>
+</ul></dd>
+<dt>Actuators</dt><dd><ul class="org-ul">
+<li>Servo-motors (shoulder, hip, knee, and ankle joints)</li>
+</ul></dd>
+<dt>Sensors</dt><dd><ul class="org-ul">
+<li>Tilt sensor (<code>angle</code> of upper body)</li>
+<li>Rotary encoder (<code>angle</code> of thigh, shin/calf, and foot)</li>
+</ul></dd>
+<dt>Unused sensors</dt><dd><ul class="org-ul">
+<li>Ground Reaction Force (GRF) sensor (heel and ball of the foot)</li>
+</ul></dd>
+</dl>
+
+<div class="note">
+<ul class="org-ul">
+<li>The GRF sensor is equipped on the sole of the foot, but <b>unused</b> yet.</li>
+<li>Red, green and blue laser rays show the angle of thigh and upper body.</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org50fc3fa" class="outline-2">
+<h2 id="org50fc3fa">The Control Methods of our biped model</h2>
+<div class="outline-text-2" id="text-org50fc3fa">
+<p>
+Our biped model has no brain but simple <b>Central Pattern Generator (CPG)</b>, and
+has a <b>tensegrity body structure</b> consists of the rigid objects and the
+servo-motors.
+</p>
+
+<p>
+The CPG manages/schedules the state machines (STMs) for each joints, and the
+servo-motors drives joints.
+</p>
+
+<ul class="org-ul">
+<li>State machines (STMs) for each joints</li>
+<li>Time-based scheduling of STM (Periodic pendulam of motorized limbs)</li>
+<li>Weak auto-ballance (Adaptive control for servo-motors)</li>
+</ul>
+
+<p>
+Note that there is no complex computation such as Inverse Kinematics (IK),
+Zero Moment Point (ZMP), or else.
+</p>
+</div>
+
+<div id="outline-container-org3814c77" class="outline-3">
+<h3 id="org3814c77">State machines (STM) for each joints</h3>
+<div class="outline-text-3" id="text-org3814c77">
+<p>
+The CPG manages/schedules the state machines (STMs) for each joints.
+</p>
+
+<ul class="org-ul">
+<li>STM for the Shoulder joint (Left)</li>
+<li>STM for the Shoulder joint (Right)</li>
+<li>STM for the Hip joint (Left)</li>
+<li>STM for the Hip joint (Right)</li>
+<li>STM for the Knee joint (Left)</li>
+<li>STM for the Knee joint (Right)</li>
+<li>STM for the Ankle joint (Left)</li>
+<li>STM for the Ankle joint (Right)</li>
+</ul>
+
+<p>
+All STMs have two states; <b>swing</b> and <b>stance</b>. (Figure <a href="#org19021e5">1</a>)
+</p>
+
+<dl class="org-dl">
+<dt>swing state </dt><dd>The state performing a motion <i>assuming that the leg is in
+swing phase.</i></dd>
+<dt>stance state</dt><dd>The state performing a motion <i>assuming that the leg is in
+stance phase.</i></dd>
+</dl>
+
+<p>
+Note that a STM state is not necessarily match to legs' swing/stance phase.
+</p>
+
+
+<div id="org19021e5" class="figure">
+<p><object type="image/svg+xml" data="STM.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 1: </span>State machines (STM) for each joints</p>
+</div>
+
+<p>
+The CPG controls the state transition of these STMs. (See the next section)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6e9d64a" class="outline-3">
+<h3 id="org6e9d64a">Time-based scheduling - Periodic pendulam of motorized limbs</h3>
+<div class="outline-text-3" id="text-org6e9d64a">
+<p>
+A STM has three timing parameter constants:
+</p>
+<dl class="org-dl">
+<dt>\(cycle\)   </dt><dd>Duration of one cycle in seconds.</dd>
+<dt>\(duty\)    </dt><dd>The ratio of stance state to one cycle.</dd>
+<dt>\(delay\)   </dt><dd>Delay to reference time as a ratio to cycle.</dd>
+</dl>
+
+
+<div id="orgf8de6f0" class="figure">
+<p><object type="image/svg+xml" data="STM-timing-chart.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 2: </span>Example timing-chart of a STM</p>
+</div>
+
+<p>
+The CPG decides the STMs' current <b>state</b> according to the following equation:
+</p>
+
+\begin{eqnarray*}
+phase &=& \left( \frac{time}{cycle} - delay + 1 \right) \pmod {1.0} \\
+state &=& \begin{cases}
+          stance & ( (1-duty) \le phase )\\
+          swing  & ( otherwise )
+          \end{cases} \\
+\end{eqnarray*}
+
+<p>
+where
+</p>
+<dl class="org-dl">
+<dt>\(time\) </dt><dd>Reference time in seconds<br />
+(<code>Sim.time</code> in Algodoo)</dd>
+<dt>\(phase\)</dt><dd>Normalized current time (\(0 \le phase \lt 1\))</dd>
+<dt>\(state\)</dt><dd>State of the STM (\(stance\) or \(swing\))</dd>
+</dl>
+
+
+<table id="orgd7c9bd5" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 2:</span> Timing parameters of STM for each joints</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Joint</th>
+<th scope="col" class="org-left">cycle</th>
+<th scope="col" class="org-right">duty</th>
+<th scope="col" class="org-right">delay<sub>Left</sub></th>
+<th scope="col" class="org-right">delay<sub>Right</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Shoulder</td>
+<td class="org-left">1.2 sec</td>
+<td class="org-right">0.60</td>
+<td class="org-right">0.00</td>
+<td class="org-right">0.50</td>
+</tr>
+
+<tr>
+<td class="org-left">Hip</td>
+<td class="org-left">1.2 sec</td>
+<td class="org-right">0.56</td>
+<td class="org-right">0.50</td>
+<td class="org-right">0.00</td>
+</tr>
+
+<tr>
+<td class="org-left">Knee</td>
+<td class="org-left">1.2 sec</td>
+<td class="org-right">0.66</td>
+<td class="org-right">0.50</td>
+<td class="org-right">0.00</td>
+</tr>
+
+<tr>
+<td class="org-left">Ankle</td>
+<td class="org-left">1.2 sec</td>
+<td class="org-right">0.15</td>
+<td class="org-right">0.55</td>
+<td class="org-right">0.05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orgfe8257a" class="outline-3">
+<h3 id="orgfe8257a">Weak auto-ballance - Adaptive control for servo-motors</h3>
+<div class="outline-text-3" id="text-orgfe8257a">
+<p>
+For each joints (servo-motors), its propotional gain \(K_p\) (i.e. <code>bendConstant</code>)
+and target angle \(\phi_{target}\) (i.e. <code>bendTarget</code>) are controlled according to
+the following equations.
+</p>
+
+\begin{eqnarray*}
+K_p &=& P_{gain} \\
+\phi_{target} &=& \alpha_{c} + \alpha_{rotor}\,\theta_{rotor} + \alpha_{base}\,\theta_{base}\\
+\end{eqnarray*}
+
+<p>
+where
+</p>
+
+<dl class="org-dl">
+<dt>\(\theta_{rotor}\)</dt><dd>The angle of the <i>rotor</i> object relative to the <b>world</b>.<br />
+(<code>angle</code> of the <i>rotor</i> in Algodoo)</dd>
+<dt>\(\theta_{base}\)</dt><dd>The angle of the <i>base</i> object relative to the <b>world</b>.<br />
+(<code>angle</code> of the <i>base</i> in Algodoo)</dd>
+</dl>
+
+<p>
+These two variables are sensor data.<br />
+Any other variables are constants.
+</p>
+
+<p>
+The constants and sensors' value to be used in the above equations, are decided
+according to the state of each joints' state machine (STM). (Table.
+<a href="#orgba3d047">3</a>)
+</p>
+
+<table id="orgba3d047" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 3:</span> Servo-motor parameters for each joints/states</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Joint</th>
+<th scope="col" class="org-left">State</th>
+<th scope="col" class="org-right">\(P_{gain}\)</th>
+<th scope="col" class="org-right">\(\alpha_{c}\)</th>
+<th scope="col" class="org-right">\(\alpha_{rotor}\)</th>
+<th scope="col" class="org-right">\(\alpha_{base}\)</th>
+<th scope="col" class="org-left">\(\theta_{rotor}\)</th>
+<th scope="col" class="org-left">\(\theta_{base}\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Shoulder</td>
+<td class="org-left">stance</td>
+<td class="org-right">6</td>
+<td class="org-right">-0.2</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-left">\(\theta_{arm}\)</td>
+<td class="org-left">\(\theta_{body}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Shoulder</td>
+<td class="org-left">swing</td>
+<td class="org-right">6</td>
+<td class="org-right">0.1</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-left">\(\theta_{arm}\)</td>
+<td class="org-left">\(\theta_{body}\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Hip</td>
+<td class="org-left">stance</td>
+<td class="org-right">150</td>
+<td class="org-right">-0.075</td>
+<td class="org-right">0.5</td>
+<td class="org-right">0.5</td>
+<td class="org-left">\(\theta_{thigh}\)</td>
+<td class="org-left">\(\theta_{body}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Hip</td>
+<td class="org-left">swing</td>
+<td class="org-right">200</td>
+<td class="org-right">0.8</td>
+<td class="org-right">-0.1</td>
+<td class="org-right">0.5</td>
+<td class="org-left">\(\theta_{thigh}\)</td>
+<td class="org-left">\(\theta_{body}\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Knee</td>
+<td class="org-left">stance</td>
+<td class="org-right">250</td>
+<td class="org-right">0.075</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-left">\(\theta_{shin}\)</td>
+<td class="org-left">\(\theta_{thigh}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Knee</td>
+<td class="org-left">swing</td>
+<td class="org-right">10</td>
+<td class="org-right">-1.0</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-left">\(\theta_{shin}\)</td>
+<td class="org-left">\(\theta_{thigh}\)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Ankle</td>
+<td class="org-left">stance</td>
+<td class="org-right">90</td>
+<td class="org-right">-1.0</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.35</td>
+<td class="org-left">\(\theta_{foot}\)</td>
+<td class="org-left">\(\theta_{shin}\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Ankle</td>
+<td class="org-left">swing</td>
+<td class="org-right">0</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-right">0.0</td>
+<td class="org-left">\(\theta_{foot}\)</td>
+<td class="org-left">\(\theta_{shin}\)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="warning">
+<p>
+In case of the real robot, \(\theta_{xyz}\) will be sensed by a tilt-sensor and/or
+a rotary encoder equipped on the object <i>xyz</i>. In general, sensors may not be so
+accurate or has some latency.
+</p>
+
+<p>
+In Algodoo, fortunately, any object (geometry) has <code>angle</code> property that is
+available to use as a very accurate tilt sensor. So we are not considering about
+sensor's error or latency.
+</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org338ff12" class="outline-2">
+<h2 id="org338ff12">Further work</h2>
+<div class="outline-text-2" id="text-org338ff12">
+<ul class="org-ul">
+<li>Event/Time driven schedule of STMs</li>
+<li>Gait pattern control</li>
+<li>Seamless gait transition of quadruped</li>
+<li>etc.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org322d74f" class="outline-2">
+<h2 id="org322d74f">Conclusion</h2>
+<div class="outline-text-2" id="text-org322d74f">
+<p>
+Swing your legs rhythmically and you can walk.
+</p>
+
+<p>
+Animals do not consider or compute the gait pattern, just learn the rhythm.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019-03-21 22:07 東京 (標準時)</p>
+<p class="author">Author: Daishi Mori (@mori0091)</p>
+<p class="date">Created: 2019-03-21 木 22:07</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
