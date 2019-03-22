@@ -30,7 +30,7 @@ rhythm.
 
 We had developed a biped model "Biped ver.3" in the past. That had a tensegrity
 body actuated by artificial muscles. It had walked just by switching two set of
-springs' parameters periodically. No sensors, no ballancers and no controls had
+springs' parameters periodically. No sensors, no balancers and no controls had
 needed.
 
 Biped 3 :
@@ -143,7 +143,7 @@ So the programming of servo-motors in Algodoo is mainly to control
 - Control methods :: 
   - State machines (STM) for each joints
   - Time-based scheduling of STM (Periodic pendulam of motorized limbs)
-  - Weak auto-ballance (Adaptive control for servo-motors)
+  - Weak auto-balance (Adaptive control for servo-motors)
 - Actuators ::
   - Servo-motors (shoulder, hip, knee, and ankle joints)
 - Sensors :: 
@@ -168,7 +168,7 @@ servo-motors drives joints.
 
 - State machines (STMs) for each joints
 - Time-based scheduling of STM (Periodic pendulam of motorized limbs)
-- Weak auto-ballance (Adaptive control for servo-motors)
+- Weak auto-balance (Adaptive control for servo-motors)
 
 Note that there is no complex computation such as Inverse Kinematics (IK),
 Zero Moment Point (ZMP), or else.
@@ -225,9 +225,10 @@ A STM has three timing parameter constants:
 robust "A state machine (STM)" as STM
 scale 1 as 120 pixels
 
-STM is stance
+STM has swing,stance
 
 @STM
+0.0 is stance
 0.2 is swing
 +0.44 is stance
 +0.56 is swing
@@ -245,7 +246,7 @@ end legend
 #+end_src
 
 #+CAPTION: Example timing-chart of a STM
-#+NAME: fig:example_timing-chart
+#+NAME: fig:timing-chart_example
 [[file:fig/STM-timing-chart.svg]]
 
 The CPG decides the STMs' current *state* according to the following equation:
@@ -275,7 +276,104 @@ where
 | Ankle    | 1.2 sec | 0.15 |         0.55 |          0.05 |
 
 
-** Weak auto-ballance - Adaptive control for servo-motors
+#+begin_src plantuml :file fig/STM-timing-chart_ALL.svg :exports none
+robust "Shoulder(L)" as LS
+robust "Hip(L)" as LH
+robust "Knee(L)" as LK
+robust "Ankle(L)" as LA
+robust "Shoulder(R)" as RS
+robust "Hip(R)" as RH
+robust "Knee(R)" as RK
+robust "Ankle(R)" as RA
+scale 1 as 120 pixels
+
+LS has swing,stance
+LH has swing,stance
+LK has swing,stance
+LA has swing,stance
+RS has swing,stance
+RH has swing,stance
+RK has swing,stance
+RA has swing,stance
+
+@LS
+0.0 is swing
++0.40 is stance
++0.60 is swing
++0.40 is stance
++0.60 is swing
++0.40 is stance
+
+@LH
+0.0 is stance
+0.5 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
+
+@LK
+0.0 is stance
+0.5 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
+
+@LA
+0.0 is swing
+0.40 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
+
+@RS
+0.0 is stance
+0.5 is swing
++0.40 is stance
++0.60 is swing
++0.40 is stance
++0.60 is swing
++0.40 is stance
+
+@RH
+0.0 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
+
+@RK
+0.0 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
+
+@RA
+0.0 is stance
+0.05 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
+
+caption Note that the time scale is normalized to "1/cycle". (i.e phase)
+#+end_src
+
+#+CAPTION: Timing-chart of STMs (ALL)
+#+NAME: fig:timing-chart_all
+[[file:fig/STM-timing-chart_ALL.svg]]
+
+
+** Weak auto-balance - Adaptive control for servo-motors
 
 For each joints (servo-motors), its propotional gain $K_p$ (i.e. =bendConstant=)
 and target angle $\phi_{target}$ (i.e. =bendTarget=) are controlled according to
@@ -291,7 +389,7 @@ where
 - $\theta_{rotor}$ :: 
      The angle of the /rotor/ object relative to the *world*.\\
      (=angle= of the /rotor/ in Algodoo)
-- $\theta_{base}$ :: 
+- $\theta_{base}$  :: 
      The angle of the /base/ object relative to the *world*.\\
      (=angle= of the /base/ in Algodoo)
 
@@ -317,6 +415,124 @@ according to the state of each joints' state machine (STM). (Table.
 |----------+--------+------------+--------------+------------------+-----------------+------------------+------------------|
 | Ankle    | stance |         90 |         -1.0 |              0.0 |            0.35 | $\theta_{foot}$  | $\theta_{shin}$  |
 | Ankle    | swing  |          0 |          0.0 |              0.0 |             0.0 | $\theta_{foot}$  | $\theta_{shin}$  |
+
+Note that the $\alpha_{c}$ is reference target angle of the joint, and the
+$(\alpha_{rotor}, \alpha_{base})$ pair is *Auto Balancer Coefficients*, which
+adjusts target angle (and also torque) according to current pose.
+
+- $\alpha_{c}$     ::
+     Reference target angle
+- $\alpha_{rotor}$ :: 
+     A coefficient for weak auto balance
+- $\alpha_{base}$  :: 
+     Another coefficient for weak auto balance
+
+So typically, servo-motors bend the joint in case of the *swing state* and
+stretch the joint in case of the *stance state*. Adding to that, hip and ankle
+joints' servo-motors adjust its target angle autonomously accoding to the pose
+of body, thigh, shin/calf and foot.
+
+Figure [[fig:timing-chart_left-leg]] and Figure [[fig:timing-chart_right-leg]] show the
+typical motion sequence of legs mapped on the STM timing-chart.
+
+#+begin_src plantuml :file fig/STM-timing-chart_left-leg.svg :exports none
+robust "Hip(L)" as LH
+robust "Knee(L)" as LK
+robust "Ankle(L)" as LA
+scale 1 as 120 pixels
+
+LH has swing,stance
+LK has swing,stance
+LA has swing,stance
+
+@LH
+0.0 is stance
+0.5 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
+LH@0.5 <-> @0.94 : bend
+LH@0.94 <-> @1.5 : stretch
+
+@LK
+0.0 is stance
+0.5 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
+LK@0.5 <-> @0.84 : bend
+LK@0.84 <-> @1.5 : stretch
+
+@LA
+0.0 is swing
+0.40 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
+LA@0.55 <-> @1.4 : bend
+LA@1.4 <-> @1.55 : stretch
+
+caption Note that the time scale is normalized to "1/cycle". (i.e phase)
+#+end_src
+
+#+CAPTION: Timing-chart of the left leg
+#+NAME: fig:timing-chart_left-leg
+[[file:fig/STM-timing-chart_left-leg.svg]]
+
+#+begin_src plantuml :file fig/STM-timing-chart_right-leg.svg :exports none
+robust "Hip(R)" as RH
+robust "Knee(R)" as RK
+robust "Ankle(R)" as RA
+scale 1 as 120 pixels
+
+RH has swing,stance
+RK has swing,stance
+RA has swing,stance
+
+@RH
+0.0 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
++0.56 is swing
++0.44 is stance
+RH@1.0 <-> @1.44 : bend
+RH@1.44 <-> @2.0 : stretch
+
+@RK
+0.0 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
++0.66 is swing
++0.34 is stance
+RK@1.0 <-> @1.34 : bend
+RK@1.34 <-> @2.0 : stretch
+
+@RA
+0.0 is stance
+0.05 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
++0.15 is swing
++0.85 is stance
+RA@1.05 <-> @1.9 : bend
+RA@1.9 <-> @2.05 : stretch
+
+caption Note that the time scale is normalized to "1/cycle". (i.e phase)
+#+end_src
+
+#+CAPTION: Timing-chart of the right leg
+#+NAME: fig:timing-chart_right-leg
+[[file:fig/STM-timing-chart_right-leg.svg]]
+
 
 #+begin_warning
 In case of the real robot, $\theta_{xyz}$ will be sensed by a tilt-sensor and/or
