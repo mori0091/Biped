@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-03-23 土 08:49 -->
+<!-- 2019-03-23 土 09:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Biped ver.6.0</title>
@@ -281,29 +281,30 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge229d0a">Abstract</a></li>
-<li><a href="#orgc3da115">Past research</a></li>
-<li><a href="#orged21538">New model</a></li>
-<li><a href="#org698b842">About Algodoo</a></li>
-<li><a href="#org2dac34c">Servo-motors in Algodoo</a></li>
-<li><a href="#org776082b">Anatomy of our biped model</a></li>
-<li><a href="#org066dce4">The Control Methods of our biped model</a>
+<li><a href="#org96b1114">Abstract</a></li>
+<li><a href="#org5ca3e79">Past research</a></li>
+<li><a href="#org842a469">New model</a></li>
+<li><a href="#org430aa2d">About Algodoo</a></li>
+<li><a href="#org407205e">Servo-motors in Algodoo</a></li>
+<li><a href="#org06127db">Anatomy of our biped model</a></li>
+<li><a href="#org0e42dfd">The Control Methods of our biped model</a>
 <ul>
-<li><a href="#org72c46d0">State machines (STM) for each joints</a></li>
-<li><a href="#org6d4bb1b">Time-based scheduling - Periodic pendulam of motorized limbs</a></li>
-<li><a href="#orga8bf258">Weak auto-balance - Adaptive control for servo-motors</a></li>
+<li><a href="#org311aad2">State machines (STM) for each joints</a></li>
+<li><a href="#org1458462">Time-based scheduling - Periodic pendulam of motorized limbs</a></li>
+<li><a href="#orga768177">Weak auto-balance - Adaptive control for servo-motors</a></li>
 </ul>
 </li>
-<li><a href="#orge292e01">Further work</a></li>
-<li><a href="#orgd467a31">Conclusion</a></li>
+<li><a href="#org0e0f9f0">Further work</a></li>
+<li><a href="#orgc6872c6">Conclusion</a></li>
 </ul>
 </div>
 </div>
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a href="https://twitter.com/mori0091?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @mori0091</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<div id="outline-container-orge229d0a" class="outline-2">
-<h2 id="orge229d0a">Abstract</h2>
-<div class="outline-text-2" id="text-orge229d0a">
+<div id="outline-container-org96b1114" class="outline-2">
+<h2 id="org96b1114">Abstract</h2>
+<div class="outline-text-2" id="text-org96b1114">
 <p>
 We developed a simulation model of a quasi passive bipedal walker. Its very
 simple time-based locomotion CPG and the tensegrity body performs smooth and
@@ -317,9 +318,9 @@ rhythm.
 </div>
 </div>
 
-<div id="outline-container-orgc3da115" class="outline-2">
-<h2 id="orgc3da115">Past research</h2>
-<div class="outline-text-2" id="text-orgc3da115">
+<div id="outline-container-org5ca3e79" class="outline-2">
+<h2 id="org5ca3e79">Past research</h2>
+<div class="outline-text-2" id="text-org5ca3e79">
 <p>
 We had developed a biped model "Biped ver.3" in the past. That had a tensegrity
 body actuated by artificial muscles. It had walked just by switching two set of
@@ -339,9 +340,9 @@ no such actuators exists in fact&#x2026;
 </div>
 </div>
 
-<div id="outline-container-orged21538" class="outline-2">
-<h2 id="orged21538">New model</h2>
-<div class="outline-text-2" id="text-orged21538">
+<div id="outline-container-org842a469" class="outline-2">
+<h2 id="org842a469">New model</h2>
+<div class="outline-text-2" id="text-org842a469">
 <p>
 So we developed new model "Biped ver.6" which has also a tensegrity body but
 actuated by servo-motors instead of artificial muscles. The new model's height,
@@ -380,9 +381,9 @@ Biomimetic 1-DOF knee joint :
 </div>
 </div>
 
-<div id="outline-container-org698b842" class="outline-2">
-<h2 id="org698b842">About Algodoo</h2>
-<div class="outline-text-2" id="text-org698b842">
+<div id="outline-container-org430aa2d" class="outline-2">
+<h2 id="org430aa2d">About Algodoo</h2>
+<div class="outline-text-2" id="text-org430aa2d">
 <p>
 The <a href="http://www.algodoo.com">Algodoo</a> is a 2D physics simulator we used.
 </p>
@@ -401,9 +402,9 @@ The <a href="http://www.algodoo.com">Algodoo</a> is a 2D physics simulator we us
 </div>
 </div>
 
-<div id="outline-container-org2dac34c" class="outline-2">
-<h2 id="org2dac34c">Servo-motors in Algodoo</h2>
-<div class="outline-text-2" id="text-org2dac34c">
+<div id="outline-container-org407205e" class="outline-2">
+<h2 id="org407205e">Servo-motors in Algodoo</h2>
+<div class="outline-text-2" id="text-org407205e">
 <p>
 A <b>servo-motor</b> in Algodoo is a hinge (rotational joint) whose <code>bend</code> property
 is set to <code>true</code>.
@@ -442,7 +443,7 @@ Typically, the <b>rotor</b> is stacked on top of the <b>base</b> and the hinge i
 connecting them.
 </p>
 
-<table id="orge433b37" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgd8bdf2a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> Property setting for hinge as servo-motor</caption>
 
 <colgroup>
@@ -526,9 +527,9 @@ So the programming of servo-motors in Algodoo is mainly to control
 </div>
 
 
-<div id="outline-container-org776082b" class="outline-2">
-<h2 id="org776082b">Anatomy of our biped model</h2>
-<div class="outline-text-2" id="text-org776082b">
+<div id="outline-container-org06127db" class="outline-2">
+<h2 id="org06127db">Anatomy of our biped model</h2>
+<div class="outline-text-2" id="text-org06127db">
 <dl class="org-dl">
 <dt>Control methods</dt><dd><ul class="org-ul">
 <li>State machines (STM) for each joints</li>
@@ -557,9 +558,9 @@ So the programming of servo-motors in Algodoo is mainly to control
 </div>
 </div>
 
-<div id="outline-container-org066dce4" class="outline-2">
-<h2 id="org066dce4">The Control Methods of our biped model</h2>
-<div class="outline-text-2" id="text-org066dce4">
+<div id="outline-container-org0e42dfd" class="outline-2">
+<h2 id="org0e42dfd">The Control Methods of our biped model</h2>
+<div class="outline-text-2" id="text-org0e42dfd">
 <p>
 Our biped model has no brain but simple <b>Central Pattern Generator (CPG)</b>, and
 has a <b>tensegrity body structure</b> consists of the rigid objects and the
@@ -583,9 +584,9 @@ Zero Moment Point (ZMP), or else.
 </p>
 </div>
 
-<div id="outline-container-org72c46d0" class="outline-3">
-<h3 id="org72c46d0">State machines (STM) for each joints</h3>
-<div class="outline-text-3" id="text-org72c46d0">
+<div id="outline-container-org311aad2" class="outline-3">
+<h3 id="org311aad2">State machines (STM) for each joints</h3>
+<div class="outline-text-3" id="text-org311aad2">
 <p>
 The CPG manages/schedules the state machines (STMs) for each joints.
 </p>
@@ -602,7 +603,7 @@ The CPG manages/schedules the state machines (STMs) for each joints.
 </ul>
 
 <p>
-All STMs have two states; <b>swing</b> and <b>stance</b>. (Figure <a href="#org9f70fbd">1</a>)
+All STMs have two states; <b>swing</b> and <b>stance</b>. (Figure <a href="#org490d491">1</a>)
 </p>
 
 <dl class="org-dl">
@@ -617,7 +618,7 @@ Note that a STM state is not necessarily match to legs' swing/stance phase.
 </p>
 
 
-<div id="org9f70fbd" class="figure">
+<div id="org490d491" class="figure">
 <p><object type="image/svg+xml" data="fig/STM.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -630,9 +631,9 @@ The CPG controls the state transition of these STMs. (See the next section)
 </div>
 </div>
 
-<div id="outline-container-org6d4bb1b" class="outline-3">
-<h3 id="org6d4bb1b">Time-based scheduling - Periodic pendulam of motorized limbs</h3>
-<div class="outline-text-3" id="text-org6d4bb1b">
+<div id="outline-container-org1458462" class="outline-3">
+<h3 id="org1458462">Time-based scheduling - Periodic pendulam of motorized limbs</h3>
+<div class="outline-text-3" id="text-org1458462">
 <p>
 A STM has three timing parameter constants:
 </p>
@@ -643,7 +644,7 @@ A STM has three timing parameter constants:
 </dl>
 
 
-<div id="org3cdd499" class="figure">
+<div id="orgb92f004" class="figure">
 <p><object type="image/svg+xml" data="fig/STM-timing-chart.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -673,7 +674,7 @@ where
 </dl>
 
 
-<table id="org6bdc907" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org33ff620" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 2:</span> Timing parameters of STM for each joints</caption>
 
 <colgroup>
@@ -733,7 +734,7 @@ where
 
 
 
-<div id="orgfbb6b56" class="figure">
+<div id="org0f2c6d9" class="figure">
 <p><object type="image/svg+xml" data="fig/STM-timing-chart_ALL.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -743,9 +744,9 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 
-<div id="outline-container-orga8bf258" class="outline-3">
-<h3 id="orga8bf258">Weak auto-balance - Adaptive control for servo-motors</h3>
-<div class="outline-text-3" id="text-orga8bf258">
+<div id="outline-container-orga768177" class="outline-3">
+<h3 id="orga768177">Weak auto-balance - Adaptive control for servo-motors</h3>
+<div class="outline-text-3" id="text-orga768177">
 <p>
 For each joints (servo-motors), its propotional gain \(K_p\) (i.e. <code>bendConstant</code>)
 and target angle \(\phi_{target}\) (i.e. <code>bendTarget</code>) are controlled according to
@@ -776,10 +777,10 @@ Any other variables are constants.
 <p>
 The constants and sensors' value to be used in the above equations, are decided
 according to the state of each joints' state machine (STM). (Table.
-<a href="#orga8ce54d">3</a>)
+<a href="#org4e51985">3</a>)
 </p>
 
-<table id="orga8ce54d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4e51985" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 3:</span> Servo-motor parameters for each joints/states</caption>
 
 <colgroup>
@@ -925,12 +926,12 @@ of body, thigh, shin/calf and foot.
 </p>
 
 <p>
-Figure <a href="#org78d8def">4</a> and Figure <a href="#org2173ef0">5</a> show the
+Figure <a href="#orgef9b45a">4</a> and Figure <a href="#orgdfb5390">5</a> show the
 typical motion sequence of legs mapped on the STM timing-chart.
 </p>
 
 
-<div id="org78d8def" class="figure">
+<div id="orgef9b45a" class="figure">
 <p><object type="image/svg+xml" data="fig/STM-timing-chart_left-leg.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -938,7 +939,7 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 
-<div id="org2173ef0" class="figure">
+<div id="orgdfb5390" class="figure">
 <p><object type="image/svg+xml" data="fig/STM-timing-chart_right-leg.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -964,9 +965,9 @@ sensor's error or latency.
 </div>
 </div>
 
-<div id="outline-container-orge292e01" class="outline-2">
-<h2 id="orge292e01">Further work</h2>
-<div class="outline-text-2" id="text-orge292e01">
+<div id="outline-container-org0e0f9f0" class="outline-2">
+<h2 id="org0e0f9f0">Further work</h2>
+<div class="outline-text-2" id="text-org0e0f9f0">
 <ul class="org-ul">
 <li>Event/Time driven schedule of STMs</li>
 <li>Gait pattern control</li>
@@ -977,9 +978,9 @@ sensor's error or latency.
 </div>
 
 
-<div id="outline-container-orgd467a31" class="outline-2">
-<h2 id="orgd467a31">Conclusion</h2>
-<div class="outline-text-2" id="text-orgd467a31">
+<div id="outline-container-orgc6872c6" class="outline-2">
+<h2 id="orgc6872c6">Conclusion</h2>
+<div class="outline-text-2" id="text-orgc6872c6">
 <p>
 Swing your legs rhythmically and you can walk.
 </p>
@@ -991,9 +992,8 @@ Animals do not consider or compute the gait pattern, just learn the rhythm.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-03-21 22:55 東京 (標準時)</p>
 <p class="author">Author: Daishi Mori (@mori0091)</p>
-<p class="date">Created: 2019-03-23 土 08:49</p>
+<p class="date">Created: 2019-03-23 土 09:54</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

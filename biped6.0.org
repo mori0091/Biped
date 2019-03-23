@@ -8,13 +8,13 @@
 #+TITLE: Biped ver.6.0
 #+SUBTITLE: A Quasi Passive Bipedal Walker
 #+AUTHOR: Daishi Mori (@mori0091)
-#+DATE: {{{modification-time(%F %R %Z,nil)}}}
 #+OPTIONS: num:0
 #+LANGUAGE: en
 #+KEYWORD: gait robot walker biomimetic
 
 #+begin_export html
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a href="https://twitter.com/mori0091?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @mori0091</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+end_export
 
 * Abstract
